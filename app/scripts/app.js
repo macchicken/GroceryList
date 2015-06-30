@@ -149,8 +149,8 @@
 
     window.ItemDetail = {
         show: function () {
-            var location = window.location.toString();
-			var itemId = location.substring(location.lastIndexOf('?') + 4);
+            var pstr = window.location.toString();
+			var itemId = pstr.substring(pstr.lastIndexOf('?') + 4);
             var oneitem=groceryDataSource.get(itemId);
 			kendo.bind($('#itemContent'), oneitem, kendo.mobile.ui);
         },
