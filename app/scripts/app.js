@@ -1,6 +1,7 @@
 (function () {
     var apiKey = "L9AbAMBD6UeRh3kb";
     var el = new Everlive(apiKey);
+	var app;
 
     var groceryDataSource = new kendo.data.DataSource({
         // transport: {
@@ -21,7 +22,10 @@
         },
         transport: {
             typeName: "Groceries"
-        }
+        },
+        schema: {
+    		model: { Id: "Id", Name: "Name" }
+  		}
     });
 
     function initialize() {
@@ -30,13 +34,13 @@
         //         groceryDataSource.read();
         //     }
         // );
-        var app = new kendo.mobile.Application(document.body, {
+        app = new kendo.mobile.Application(document.body, {
             skin: "flat",
             transition: "slide"
         });
         $("#grocery-list").kendoMobileListView({
             dataSource: groceryDataSource,
-            template: "#: Name #"
+            template: $("#item-model-view-template").text()
         });
         navigator.splashscreen.hide();
     };
@@ -130,9 +134,9 @@
                 navigator.notification.alert("Please provide a grocery.");
                 return;
             }
-
             groceryDataSource.add({
-                Name: this.grocery
+                Name: this.grocery,
+                Id: ""
             });
             groceryDataSource.one("sync", this.close);
             groceryDataSource.sync();
@@ -142,6 +146,21 @@
             this.grocery = "";
         }
     });
+
+    window.ItemDetail = {
+        show: function () {
+            var location = window.location.toString();
+			var itemId = location.substring(location.lastIndexOf('?') + 4);
+            var oneitem=groceryDataSource.get(itemId);
+			kendo.bind($('#itemContent'), oneitem, kendo.mobile.ui);
+        },
+        modify: function () {
+			var oneitem=groceryDataSource.get($('#grid').val());
+            oneitem.set("Name",$('#grname').val());
+            groceryDataSource.sync();
+            app.navigate("#:back");
+        }
+    };
 
     document.addEventListener("deviceready", initialize);
 }());
