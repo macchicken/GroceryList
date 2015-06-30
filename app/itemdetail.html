@@ -1,8 +1,10 @@
 <div data-role="view" data-title="Grocery Detail" data-show="ItemDetail.show" data-layout="back-layout" data-reload="true">
     <div id="itemContent">
-        <label for="grname">Name</label>
-        <input id="grname" type="text" data-bind="value: Name">
-        <input hidden id="grid" type="text" data-bind="value: Id">
+        <div>
+            <label for="grname">Name</label>
+            <input id="grname" type="text" data-bind="value: Name">
+            <input hidden id="grid" type="text" data-bind="value: Id">
+        </div>
     </div>
     <div>
         <p><button data-click="ItemDetail.modify" data-align="center" class="add-button" data-role="button">Modify</button></p>
