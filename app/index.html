@@ -111,6 +111,12 @@
                     <input type="text" data-bind="value: grocery">
                 </label>
             </li>
+            <li>
+                <label>
+                    Quantity:
+                    <input type="text" data-bind="value: quantity">
+                </label>
+            </li>
         </ul>
         <button data-bind="click: add" class="add-button" data-role="button">Add</button>
         <button data-bind="click: close" class="close-button" data-role="button">Close</button>
@@ -118,7 +124,7 @@
     <div data-role="layout" data-id="back-layout">
         <div data-role="header">
             <div data-role="navbar">
-                <a data-align="right" data-role="backbutton" data-icon="rewind">Back</a>
+                <a data-align="right" data-role="backbutton">Back</a>
                 <span data-role="view-title"></span>
             </div>
         </div>

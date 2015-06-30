@@ -24,7 +24,7 @@
             typeName: "Groceries"
         },
         schema: {
-    		model: { Id: "Id", Name: "Name" }
+    		model: { Id: "Id", Name: "Name", Quantity:0 }
   		}
     });
 
@@ -136,7 +136,8 @@
             }
             groceryDataSource.add({
                 Name: this.grocery,
-                Id: ""
+                Id: "",
+                Quantity: this.quantity
             });
             groceryDataSource.one("sync", this.close);
             groceryDataSource.sync();
@@ -157,6 +158,7 @@
         modify: function () {
 			var oneitem=groceryDataSource.get($('#grid').val());
             oneitem.set("Name",$('#grname').val());
+            oneitem.set("Quantity",$('#grquan').val());
             groceryDataSource.sync();
             app.navigate("#:back");
         },
