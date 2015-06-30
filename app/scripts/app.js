@@ -159,6 +159,12 @@
             oneitem.set("Name",$('#grname').val());
             groceryDataSource.sync();
             app.navigate("#:back");
+        },
+        delete: function () {
+			var oneitem=groceryDataSource.get($('#grid').val());
+            groceryDataSource.remove(oneitem);
+            groceryDataSource.sync();
+            app.navigate("#:back");
         }
     };
 
